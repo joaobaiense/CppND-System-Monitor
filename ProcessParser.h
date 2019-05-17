@@ -138,25 +138,23 @@ long int ProcessParser::getSysUpTime(){
     string line;
     ifstream stream;
     string path = Path::basePath() + Path::upTimePath();
-    // cout << path << endl;
 
     Util::getStream(path, stream);
 
+    getline(stream, line);
+
     istringstream buf(line);
-    ostringstream o(line);
-    cout << o.str() << endl;
 
     istream_iterator<string> beg(buf), end;
 
     vector<string> values(beg, end);
-
-    // cout << "values size: " << to_string(values.size()) << endl;
 
     return stoi(values[0]);
 
 }
 
 string ProcessParser::getProcUser(string pid){
+    
     string line;
     string name = "Uid:";
     string result = "";
@@ -195,7 +193,7 @@ string ProcessParser::getProcUser(string pid){
     }
 
     // edge case response
-    return "";
+    return "NOTF";
 }
 
 vector<string> ProcessParser::getPidList(){
@@ -233,6 +231,7 @@ string ProcessParser::getCmd(string pid){
     ifstream stream;
     string path = Path::basePath() + pid + Path::cmdPath();
     Util::getStream(path, stream);
+    getline(stream, line);
 
     return line;
 }
