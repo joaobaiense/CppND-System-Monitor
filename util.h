@@ -53,4 +53,5 @@ void Util::getStream(std::string path, std::ifstream& stream){
         stream.close();
         throw std::runtime_error("Non - existing PID");
     }
+    std::cout << "Opening file: " << path << std::endl;
 }

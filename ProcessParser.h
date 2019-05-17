@@ -138,14 +138,19 @@ long int ProcessParser::getSysUpTime(){
     string line;
     ifstream stream;
     string path = Path::basePath() + Path::upTimePath();
+    // cout << path << endl;
 
     Util::getStream(path, stream);
 
     istringstream buf(line);
+    ostringstream o(line);
+    cout << o.str() << endl;
 
     istream_iterator<string> beg(buf), end;
 
     vector<string> values(beg, end);
+
+    // cout << "values size: " << to_string(values.size()) << endl;
 
     return stoi(values[0]);
 
