@@ -6,6 +6,7 @@ private:
     std::vector<Process>_list;
 public:
     ProcessContainer(){
+        cout << "ProcessContainer" << endl;
         this->refreshList();
     }
     void refreshList();
