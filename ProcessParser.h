@@ -154,7 +154,7 @@ long int ProcessParser::getSysUpTime(){
 }
 
 string ProcessParser::getProcUser(string pid){
-    
+
     string line;
     string name = "Uid:";
     string result = "";
@@ -165,6 +165,7 @@ string ProcessParser::getProcUser(string pid){
 
     // Search for UID
     while(getline(stream, line)){
+
         if(line.compare(0, name.size(), name) == 0 ){
             istringstream buf(line);
             istream_iterator<string> beg(buf), end;
@@ -173,13 +174,15 @@ string ProcessParser::getProcUser(string pid){
             result = values[1];
             break;
         }
+
     }
 
+    ifstream stream2;
     // Search for name of user with selected UID 
-    Util::getStream("/etc/passwd", stream);
+    Util::getStream("/etc/passwd", stream2);
 
     name = "x:" + result;
-    while(getline(stream,line)){
+    while(getline(stream2,line)){
         /*
         npos is a static member constant value with the greatest possible value for an element of type size_t.
             This value, when used as the value for a len (or sublen) parameter in string's member functions, means "until the end of the string".
@@ -227,7 +230,7 @@ vector<string> ProcessParser::getPidList(){
 
 string ProcessParser::getCmd(string pid){
 
-    string line;
+    string line = "";
     ifstream stream;
     string path = Path::basePath() + pid + Path::cmdPath();
     Util::getStream(path, stream);
